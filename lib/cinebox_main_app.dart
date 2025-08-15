@@ -1,3 +1,4 @@
+import 'package:cinebox/ui/core/themes/theme.dart';
 import 'package:cinebox/ui/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ class CineboxMainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.theme,
       routes: {
         "/": (_) => SplashScreen(),
       },

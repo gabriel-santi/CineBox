@@ -1,3 +1,4 @@
+import 'package:cinebox/ui/core/themes/resource.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,6 +15,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Hello world"),
+      ),
+      body: Center(
+        child: Image.asset(R.ASSETS_IMAGES_BG_LOGIN_PNG),
       ),
     );
   }
