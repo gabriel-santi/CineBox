@@ -8,10 +8,10 @@ class Success<T> extends Result<T> {
 }
 
 class Failure<T> extends Result<T> {
-  final Exception erro;
+  final Exception error;
   final Object? value;
 
-  Failure(this.erro, [this.value]);
+  Failure(this.error, [this.value]);
 }
 
 Result<Unit> successOfUnit() => Success(Unit());

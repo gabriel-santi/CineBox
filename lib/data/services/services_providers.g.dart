@@ -6,6 +6,54 @@ part of 'services_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+@ProviderFor(googleSigninService)
+const googleSigninServiceProvider = GoogleSigninServiceProvider._();
+
+final class GoogleSigninServiceProvider
+    extends
+        $FunctionalProvider<
+          GoogleSignInService,
+          GoogleSignInService,
+          GoogleSignInService
+        >
+    with $Provider<GoogleSignInService> {
+  const GoogleSigninServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'googleSigninServiceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$googleSigninServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<GoogleSignInService> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GoogleSignInService create(Ref ref) {
+    return googleSigninService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GoogleSignInService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GoogleSignInService>(value),
+    );
+  }
+}
+
+String _$googleSigninServiceHash() =>
+    r'be1ff3215c98dc243bfef8c7d3be0c76add2e9c6';
+
 @ProviderFor(localStorageService)
 const localStorageServiceProvider = LocalStorageServiceProvider._();
 
