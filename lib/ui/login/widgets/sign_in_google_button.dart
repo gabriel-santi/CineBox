@@ -40,7 +40,7 @@ class SignInGoogleButton extends StatelessWidget {
             ),
           ),
           Text(
-            !isLoading ? "Sign in with Google" : "Logging in...",
+            !isLoading ? "Entrar com Google" : "Realizando Login...",
             style: AppTextStyles.regularSmall.copyWith(color: AppColors.darkGrey),
           ),
         ],

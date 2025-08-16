@@ -42,16 +42,16 @@ class AuthRepositoryImpl implements AuthRepository {
           return successOfUnit();
         } on DioException catch (e, st) {
           log(
-            'Error on authenticate user on backend',
+            'Erro ao autenticar usuário no backend',
             name: 'AuthRepository',
             error: e,
             stackTrace: st,
           );
-          return Failure(DataException('Error on authenticate user on backend'));
+          return Failure(DataException('Erro ao autenticar usuário no backend'));
         }
       case Failure<String>(error: final erro):
-        log('Error on login with Google', name: 'AuthRepository', error: erro);
-        return Failure(DataException('Error on login with Google'));
+        log('Erro ao autenticar usuário com Google', name: 'AuthRepository', error: erro);
+        return Failure(DataException('Erro ao autenticar usuário com Google'));
     }
   }
 
@@ -65,12 +65,12 @@ class AuthRepositoryImpl implements AuthRepository {
           case Success<Unit>():
             return successOfUnit();
           case Failure<Unit>(error: final erro):
-            log('Error on logOut ID Token', name: 'AuthRepository', error: erro);
+            log('Erro ao remover ID Token no Logout', name: 'AuthRepository', error: erro);
             return Failure(DataException('Error on logOut ID Token'));
         }
       case Failure<Unit>(error: final erro):
-        log('Error on logOut with Google', name: 'AuthRepository', error: erro);
-        return Failure(DataException('Error on logOut with Google'));
+        log('Erro ao Logout com Google', name: 'AuthRepository', error: erro);
+        return Failure(DataException('Erro ao Logout com Google'));
     }
   }
 }

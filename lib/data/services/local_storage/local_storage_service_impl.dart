@@ -14,7 +14,7 @@ class LocalStorageServiceImpl implements LocalStorageService {
     if (token != null) {
       return Success(token);
     }
-    return Failure(Exception('Token not found'));
+    return Failure(Exception('Token não encontrado'));
   }
 
   @override

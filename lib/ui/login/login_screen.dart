@@ -22,7 +22,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with LoaderAndMessage
           Navigator.pushNamedAndRemoveUntil(context, "/home", (routes) => false);
         },
         error: (error, st) {
-          showErrorSnackbar('Error on Login');
+          showErrorSnackbar('Erro ao realizar Login');
         },
       );
     });

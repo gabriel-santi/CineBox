@@ -18,7 +18,7 @@ class LoginWithGoogleCommand extends _$LoginWithGoogleCommand {
         state = AsyncData(null);
       case Failure<Unit>():
         state = AsyncError(
-          "Error on LogIn, please contact the suport",
+          "Erro ao realizar login, entre em contato com o suporte",
           StackTrace.current,
         );
     }

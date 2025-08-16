@@ -15,15 +15,15 @@ class GoogleSigninServiceImpl implements GoogleSignInService {
         return Success(idToken);
       }
 
-      return Failure(Exception("User is not signed in Google"));
+      return Failure(Exception("Usuário não logado com Google"));
     } catch (e, s) {
       log(
-        'User is not signed in Google',
+        'Usuário não logado com Google',
         name: "GoogleSignInService",
         error: e,
         stackTrace: s,
       );
-      return Failure(Exception("User is not signed in Google"));
+      return Failure(Exception("Usuário não logado com Google"));
     }
   }
 
@@ -37,15 +37,15 @@ class GoogleSigninServiceImpl implements GoogleSignInService {
       if (auth.authentication case GoogleSignInAuthentication(idToken: final idToken?)) {
         return Success(idToken);
       }
-      return Failure(Exception('Failed to retrive ID token from Google Sign-In'));
+      return Failure(Exception('Erro ao obter Token do Google Sign-In'));
     } catch (e, s) {
       log(
-        'Failed to retrive ID Token from Google Sign-In',
+        'Erro ao obter Token do Google Sign-In',
         name: "GoogleSignInService",
         error: e,
         stackTrace: s,
       );
-      return Failure(Exception('Failed to retrive ID token from Google Sign-In'));
+      return Failure(Exception('Erro ao obter Token do Google Sign-In'));
     }
   }
 
@@ -56,12 +56,12 @@ class GoogleSigninServiceImpl implements GoogleSignInService {
       return successOfUnit();
     } catch (e, s) {
       log(
-        'Google Sign-Out error',
+        'Erro ao realizar logout com Google',
         name: "GoogleSignInService",
         error: e,
         stackTrace: s,
       );
-      return Failure(Exception('Google Sign-Out error'));
+      return Failure(Exception('Erro ao realizar logout com Google'));
     }
   }
 }
