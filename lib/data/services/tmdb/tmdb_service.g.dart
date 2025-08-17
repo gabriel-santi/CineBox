@@ -60,7 +60,7 @@ class _TmdbService implements TmdbService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/movies/popular',
+            '/movie/popular',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -93,7 +93,7 @@ class _TmdbService implements TmdbService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/movies/top_rated',
+            '/movie/top_rated',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -126,7 +126,7 @@ class _TmdbService implements TmdbService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/movies/now_playing',
+            '/movie/now_playing',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -159,7 +159,7 @@ class _TmdbService implements TmdbService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/movies/upcoming',
+            '/movie/upcoming',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -253,7 +253,7 @@ class _TmdbService implements TmdbService {
   Future<MovieDetailsResponse> getMovieDetails(
     int movieId, {
     String language = 'pt-BR',
-    String appendToResponse,
+    String appendToResponse = '',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
