@@ -1,3 +1,4 @@
+import 'package:cinebox/ui/favorites/favorites_screen.dart';
 import 'package:cinebox/ui/home/widgets/home_bottom_nav_bar.dart';
 import 'package:cinebox/ui/movies/movies_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +12,31 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: MoviesScreen(),
-      // AnimatedSwitcher(
-      //   duration: Duration(milliseconds: 400),
-      //   transitionBuilder: (child, animation) => FadeTransition(
-      //     opacity: animation,
-      //     child: child,
-      //   ),
-      //   child:
-      // ),
-      bottomNavigationBar: HomeBottomNavBar(),
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 400),
+        transitionBuilder: (child, animation) => FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
+        child: switch (_currentIndex) {
+          0 => MoviesScreen(key: ValueKey(0)),
+          1 => FavoritesScreen(key: ValueKey(1)),
+          _ => MoviesScreen(key: ValueKey(0)),
+        },
+      ),
+      bottomNavigationBar: HomeBottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
+      ),
     );
   }
 }
