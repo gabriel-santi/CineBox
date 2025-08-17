@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:cinebox/config/result/result.dart';
+import 'package:cinebox/data/core/result/result.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import './google_signin_service.dart';
