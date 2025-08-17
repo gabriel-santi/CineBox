@@ -1,15 +1,24 @@
 import 'package:cinebox/config/result/result.dart';
+import 'package:cinebox/data/repositories/movies/movies_repository.dart';
 import 'package:cinebox/data/repositories/tmdb/tmdb_repository.dart';
+import 'package:cinebox/domain/extensions/mark_favorite_extension.dart';
+import 'package:cinebox/domain/models/favorite_movie.dart';
 import 'package:cinebox/domain/models/movie.dart';
 import 'package:cinebox/domain/models/movies_by_category.dart';
 
 class GetMoviesByCategoryUsecase {
   final TmdbRepository _tmdbRepository;
+  final MoviesRepository _moviesRepository;
 
-  GetMoviesByCategoryUsecase({required TmdbRepository tmdbRepository}) : _tmdbRepository = tmdbRepository;
+  GetMoviesByCategoryUsecase({
+    required TmdbRepository tmdbRepository,
+    required MoviesRepository moviesRepository,
+  }) : _tmdbRepository = tmdbRepository,
+       _moviesRepository = moviesRepository;
 
   Future<Result<MoviesByCategory>> execute() async {
     final results = await Future.wait([
+      _moviesRepository.getMyFavoritesMovies(),
       _tmdbRepository.getPopularMovies(),
       _tmdbRepository.getTopRatedMovies(),
       _tmdbRepository.getNowPlayingMovies(),
@@ -17,17 +26,20 @@ class GetMoviesByCategoryUsecase {
     ]);
 
     if (results case [
+      Success<List<FavoriteMovie>>(value: final favorites),
       Success<List<Movie>>(value: final popular),
       Success<List<Movie>>(value: final topRated),
       Success<List<Movie>>(value: final nowPlaying),
       Success<List<Movie>>(value: final upcoming),
     ]) {
+      final favoritesID = favorites.map<int>((f) => f.id).toList(growable: false);
+
       return Success(
         MoviesByCategory(
-          popular: popular,
-          topRated: topRated,
-          nowPlaying: nowPlaying,
-          upcoming: upcoming,
+          popular: popular.markAsFavorite(favoritesID),
+          topRated: topRated.markAsFavorite(favoritesID),
+          nowPlaying: nowPlaying.markAsFavorite(favoritesID),
+          upcoming: upcoming.markAsFavorite(favoritesID),
         ),
       );
     }
