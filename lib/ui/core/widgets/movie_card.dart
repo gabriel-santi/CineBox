@@ -4,7 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MovieCard extends ConsumerStatefulWidget {
-  const MovieCard({super.key});
+  final int id;
+  final String title;
+  final int year;
+  final String imageUrl;
+  final bool isFavorite;
+  final VoidCallback? onFavoriteTap;
+
+  const MovieCard({
+    super.key,
+    required this.id,
+    required this.title,
+    required this.year,
+    required this.imageUrl,
+    required this.isFavorite,
+    this.onFavoriteTap,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _MovieCardState();
@@ -22,8 +37,7 @@ class _MovieCardState extends ConsumerState<MovieCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CachedNetworkImage(
-                imageUrl:
-                    'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRUGBvJEtlb5977KTrzddRUHGtIk4JR_a2AOXRa54frny5MTOPlHERr5epxbn_ydWPoU4e1PrgFkWE1oi0LavrvOxTVf4T9uC5AIrESe6TBwA',
+                imageUrl: widget.imageUrl,
                 imageBuilder: (context, imageProvider) {
                   return Container(
                     width: 148,
@@ -56,7 +70,7 @@ class _MovieCardState extends ConsumerState<MovieCard> {
               ),
               SizedBox(height: 20),
               Text(
-                "Demon Slayer",
+                widget.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -65,7 +79,7 @@ class _MovieCardState extends ConsumerState<MovieCard> {
                 ),
               ),
               Text(
-                "2025",
+                widget.year.toString(),
                 style: TextStyle(
                   fontSize: 12,
                   color: AppColors.lightGrey,
@@ -85,7 +99,7 @@ class _MovieCardState extends ConsumerState<MovieCard> {
               radius: 20,
               backgroundColor: Colors.white,
               child: IconButton(
-                onPressed: () {},
+                onPressed: widget.onFavoriteTap,
                 icon: Icon(
                   Icons.favorite_border,
                   color: AppColors.lightGrey,

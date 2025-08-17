@@ -1,21 +1,18 @@
+import 'package:cinebox/domain/models/movie.dart';
 import 'package:cinebox/ui/core/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MoviesBox extends ConsumerStatefulWidget {
+class MoviesBox extends StatelessWidget {
   final String title;
   final bool vertical;
+  final List<Movie> movies;
   const MoviesBox({
     super.key,
     required this.title,
     this.vertical = false,
+    required this.movies,
   });
 
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MoviesBoxState();
-}
-
-class _MoviesBoxState extends ConsumerState<MoviesBox> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,26 +21,29 @@ class _MoviesBoxState extends ConsumerState<MoviesBox> {
         Padding(
           padding: const EdgeInsets.only(left: 20, top: 20, bottom: 24),
           child: Text(
-            widget.title,
+            title,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
             textAlign: TextAlign.start,
           ),
         ),
         Visibility(
-          visible: !widget.vertical,
+          visible: !vertical,
           replacement: Center(
             child: Wrap(
               runAlignment: WrapAlignment.center,
               spacing: 20,
               runSpacing: 20,
               children: [
-                MovieCard(),
-                MovieCard(),
-                MovieCard(),
-                MovieCard(),
-                MovieCard(),
-                MovieCard(),
-                MovieCard(),
+                for (var movie in movies)
+                  MovieCard(
+                    id: movie.id,
+                    title: movie.title,
+                    year: movie.realeaseDate != null && movie.realeaseDate!.isNotEmpty
+                        ? DateTime.parse(movie.realeaseDate!).year
+                        : DateTime.now().year,
+                    imageUrl: "https://images.tmdb.org/t/p/w154/${movie.posterPath}",
+                    isFavorite: movie.isFavorite,
+                  ),
               ],
             ),
           ),
@@ -51,14 +51,23 @@ class _MoviesBoxState extends ConsumerState<MoviesBox> {
             width: MediaQuery.sizeOf(context).width,
             height: 253,
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: movies.length,
               padding: EdgeInsets.only(left: 20),
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
+                final movie = movies[index];
                 return Padding(
                   padding: const EdgeInsets.only(right: 16),
-                  child: MovieCard(),
+                  child: MovieCard(
+                    id: movie.id,
+                    title: movie.title,
+                    year: movie.realeaseDate != null && movie.realeaseDate!.isNotEmpty
+                        ? DateTime.parse(movie.realeaseDate!).year
+                        : DateTime.now().year,
+                    imageUrl: "https://images.tmdb.org/t/p/w154/${movie.posterPath}",
+                    isFavorite: movie.isFavorite,
+                  ),
                 );
               },
             ),
