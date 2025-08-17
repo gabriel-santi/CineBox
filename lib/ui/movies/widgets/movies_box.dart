@@ -4,7 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MoviesBox extends ConsumerStatefulWidget {
   final String title;
-  const MoviesBox({super.key, required this.title});
+  final bool vertical;
+  const MoviesBox({
+    super.key,
+    required this.title,
+    this.vertical = false,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _MoviesBoxState();
@@ -24,20 +29,39 @@ class _MoviesBoxState extends ConsumerState<MoviesBox> {
             textAlign: TextAlign.start,
           ),
         ),
-        SizedBox(
-          width: MediaQuery.sizeOf(context).width,
-          height: 253,
-          child: ListView.builder(
-            itemCount: 10,
-            padding: EdgeInsets.only(left: 20),
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: MovieCard(),
-              );
-            },
+        Visibility(
+          visible: !widget.vertical,
+          replacement: Center(
+            child: Wrap(
+              runAlignment: WrapAlignment.center,
+              spacing: 20,
+              runSpacing: 20,
+              children: [
+                MovieCard(),
+                MovieCard(),
+                MovieCard(),
+                MovieCard(),
+                MovieCard(),
+                MovieCard(),
+                MovieCard(),
+              ],
+            ),
+          ),
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            height: 253,
+            child: ListView.builder(
+              itemCount: 10,
+              padding: EdgeInsets.only(left: 20),
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: MovieCard(),
+                );
+              },
+            ),
           ),
         ),
       ],

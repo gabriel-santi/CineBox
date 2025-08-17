@@ -13,7 +13,7 @@ class _MoviesByCategoryState extends ConsumerState<MoviesByCategory> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 20, bottom: 130),
+      padding: EdgeInsets.only(top: 20, bottom: 100),
       child: Column(
         children: [
           MoviesBox(title: "Mais populares"),
