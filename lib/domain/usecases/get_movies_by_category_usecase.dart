@@ -9,7 +9,7 @@ class GetMoviesByCategoryUsecase {
   GetMoviesByCategoryUsecase({required TmdbRepository tmdbRepository}) : _tmdbRepository = tmdbRepository;
 
   Future<Result<MoviesByCategory>> execute() async {
-    final results = Future.wait([
+    final results = await Future.wait([
       _tmdbRepository.getPopularMovies(),
       _tmdbRepository.getTopRatedMovies(),
       _tmdbRepository.getNowPlayingMovies(),
