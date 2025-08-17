@@ -6,15 +6,15 @@ part 'movie_response.g.dart';
 @JsonSerializable()
 class MovieResponse {
   final int page;
-  final int totalResults;
-  final int totalPages;
   final List<MovieItem> results;
+  final int? totalResults;
+  final int? totalPages;
 
   MovieResponse({
     required this.page,
-    required this.totalResults,
-    required this.totalPages,
     required this.results,
+    this.totalResults,
+    this.totalPages,
   });
 
   factory MovieResponse.fromJson(Map<String, dynamic> json) => _$MovieResponseFromJson(json);
