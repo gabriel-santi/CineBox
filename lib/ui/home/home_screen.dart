@@ -15,14 +15,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 400),
-        transitionBuilder: (child, animation) => FadeTransition(
-          opacity: animation,
-          child: child,
-        ),
-        child: MoviesScreen(),
-      ),
+      body: MoviesScreen(),
+      // AnimatedSwitcher(
+      //   duration: Duration(milliseconds: 400),
+      //   transitionBuilder: (child, animation) => FadeTransition(
+      //     opacity: animation,
+      //     child: child,
+      //   ),
+      //   child:
+      // ),
       bottomNavigationBar: HomeBottomNavBar(),
     );
   }
