@@ -60,6 +60,7 @@ class MoviesBox extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(right: 16),
                   child: MovieCard(
+                    key: UniqueKey(),
                     id: movie.id,
                     title: movie.title,
                     year: movie.realeaseDate != null && movie.realeaseDate!.isNotEmpty

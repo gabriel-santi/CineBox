@@ -31,6 +31,7 @@ class BackendAuthInterceptor extends Interceptor {
       localStorage.removeIdToken();
       Navigator.of(navKey.currentContext!).pushNamedAndRemoveUntil("/login", (_) => false);
     }
+    handler.reject(err);
   }
 }
 
