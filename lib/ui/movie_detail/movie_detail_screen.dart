@@ -79,6 +79,15 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> with Load
                               child: CircularProgressIndicator(),
                             ),
                           ),
+                          imageBuilder: (context, imageProvider) => Container(
+                            width: MediaQuery.sizeOf(context).width - 4,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                           errorWidget: (context, url, error) {
                             return Container(
                               width: MediaQuery.sizeOf(context).width - 4,
