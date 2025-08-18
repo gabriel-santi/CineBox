@@ -54,7 +54,7 @@ abstract class TmdbService {
     @Query('with_genres') String? withGenres,
   });
 
-  @GET('/movie/{movie_id}?include_image_language-pt,null')
+  @GET('/movie/{movie_id}?include_image_language=pt,null')
   Future<MovieDetailsResponse> getMovieDetails(
     @Path('movie_id') int movieId, {
     @Query('language') String language = 'pt-BR',

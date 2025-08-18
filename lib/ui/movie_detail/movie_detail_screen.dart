@@ -73,7 +73,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> with Load
                           imageUrl: data.images[index],
                           fit: BoxFit.cover,
                           placeholder: (context, url) => Container(
-                            width: 150,
+                            width: MediaQuery.sizeOf(context).width - 4,
                             color: AppColors.lightGrey,
                             child: Center(
                               child: CircularProgressIndicator(),
@@ -81,7 +81,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> with Load
                           ),
                           errorWidget: (context, url, error) {
                             return Container(
-                              width: 150,
+                              width: MediaQuery.sizeOf(context).width - 4,
                               height: 184,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
@@ -119,7 +119,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> with Load
                         style: AppTextStyles.lightGreyRegular,
                       ),
                       Text(
-                        "${DateTime.parse(data.releaseDate).year} (USA) | ${hoursRuntime}h$minutesRuntime",
+                        "${DateTime.parse(data.releaseDate).year} | ${hoursRuntime}h$minutesRuntime",
                         style: AppTextStyles.regularSmall,
                       ),
                       Text(

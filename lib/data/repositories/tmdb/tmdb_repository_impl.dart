@@ -156,7 +156,7 @@ class TmdbRepositoryImpl implements TmdbRepository {
         voteCount: response.voteCount,
         images: response.images.backdrops
             .map(
-              (i) => 'https://image.tmdb.org/t/p/w343/${i.filePath}',
+              (i) => 'https://image.tmdb.org/t/p/w342/${i.filePath}',
             )
             .toList(),
         cast: response.credits.cast

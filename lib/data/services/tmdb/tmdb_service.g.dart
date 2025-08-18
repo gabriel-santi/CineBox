@@ -266,7 +266,7 @@ class _TmdbService implements TmdbService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/movie/${movieId}?include_image_language-pt,null',
+            '/movie/${movieId}?include_image_language=pt,null',
             queryParameters: queryParameters,
             data: _data,
           )
