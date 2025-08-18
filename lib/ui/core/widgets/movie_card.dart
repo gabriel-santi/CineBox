@@ -64,100 +64,105 @@ class _MovieCardState extends ConsumerState<MovieCard> with LoaderAndMessage {
       },
     );
 
-    return Stack(
-      children: [
-        SizedBox(
-          width: 148,
-          height: 250,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CachedNetworkImage(
-                imageUrl: widget.imageUrl,
-                imageBuilder: (context, imageProvider) {
-                  return Container(
-                    width: 148,
-                    height: 184,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pushNamed("/movie_details", arguments: widget.id);
+      },
+      child: Stack(
+        children: [
+          SizedBox(
+            width: 148,
+            height: 250,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CachedNetworkImage(
+                  imageUrl: widget.imageUrl,
+                  imageBuilder: (context, imageProvider) {
+                    return Container(
+                      width: 148,
+                      height: 184,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return Container(
-                    width: 148,
-                    height: 184,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.lightGrey,
-                    ),
-                    child: Center(
-                      child: Icon(Icons.broken_image, color: AppColors.darkGrey),
-                    ),
-                  );
-                },
-                placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(),
+                    );
+                  },
+                  errorWidget: (context, url, error) {
+                    return Container(
+                      width: 148,
+                      height: 184,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.lightGrey,
+                      ),
+                      child: Center(
+                        child: Icon(Icons.broken_image, color: AppColors.darkGrey),
+                      ),
+                    );
+                  },
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
-              ),
-              SizedBox(height: 20),
-              Text(
-                widget.title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                SizedBox(height: 20),
+                Text(
+                  widget.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              Text(
-                widget.year.toString(),
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppColors.lightGrey,
-                  fontWeight: FontWeight.w400,
+                Text(
+                  widget.year.toString(),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: AppColors.lightGrey,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          right: 0,
-          bottom: 50,
-          child: Material(
-            elevation: 4,
-            borderRadius: BorderRadius.circular(20),
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.white,
-              child: IconButton(
-                onPressed:
-                    widget.onFavoriteTap ??
-                    () {
-                      ref
-                          .read(movieCardViewModelProvider(widget.key!, widget.id).notifier)
-                          .addOrRemoveFavorite(
-                            id: widget.id,
-                            title: widget.title,
-                            posterPath: widget.imageUrl,
-                            year: widget.year,
-                            favorite: !isFavorite,
-                          );
-                    },
-                icon: Icon(
-                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                  color: isFavorite ? AppColors.redColor : AppColors.lightGrey,
-                  size: 16,
+          Positioned(
+            right: 0,
+            bottom: 50,
+            child: Material(
+              elevation: 4,
+              borderRadius: BorderRadius.circular(20),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  onPressed:
+                      widget.onFavoriteTap ??
+                      () {
+                        ref
+                            .read(movieCardViewModelProvider(widget.key!, widget.id).notifier)
+                            .addOrRemoveFavorite(
+                              id: widget.id,
+                              title: widget.title,
+                              posterPath: widget.imageUrl,
+                              year: widget.year,
+                              favorite: !isFavorite,
+                            );
+                      },
+                  icon: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: isFavorite ? AppColors.redColor : AppColors.lightGrey,
+                    size: 16,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

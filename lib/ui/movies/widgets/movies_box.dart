@@ -36,6 +36,7 @@ class MoviesBox extends StatelessWidget {
               children: [
                 for (var movie in movies)
                   MovieCard(
+                    key: UniqueKey(),
                     id: movie.id,
                     title: movie.title,
                     year: movie.realeaseDate != null && movie.realeaseDate!.isNotEmpty
