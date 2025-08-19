@@ -46,7 +46,11 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> with LoaderAn
           return CustomScrollView(
             slivers: [
               SliverPadding(
-                padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
+                padding: EdgeInsetsGeometry.only(
+                  bottom: 100,
+                  left: 16,
+                  right: 16,
+                ),
                 sliver: SliverGrid(
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 148,
