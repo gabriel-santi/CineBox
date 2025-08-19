@@ -11,11 +11,17 @@ class MoviesByGender extends ConsumerWidget {
     final searchedMovies = ref.watch(getMoviesByGenreCommandProvider);
 
     return searchedMovies.when(
-      loading: () => Center(
-        child: CircularProgressIndicator(),
+      loading: () => Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
-      error: (e, st) => Center(
-        child: Text("Erro ao buscar filmes"),
+      error: (e, st) => Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Center(
+          child: Text("Erro ao buscar filmes"),
+        ),
       ),
       data: (data) => Padding(
         padding: const EdgeInsets.only(bottom: 100),

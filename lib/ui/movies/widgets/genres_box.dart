@@ -18,8 +18,11 @@ class _GenresBoxState extends ConsumerState<GenresBox> {
     final genres = ref.watch(getGenresCommandProvider);
 
     return genres.when(
-      loading: () => Center(
-        child: CircularProgressIndicator(),
+      loading: () => Padding(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
       error: (e, st) => Center(
         child: Text("Erro ao buscar gêneros"),
